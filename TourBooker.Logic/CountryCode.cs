@@ -1,6 +1,7 @@
 ﻿using Pluralsight.AdvCShColls.TourBooker.Logic;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,23 @@ namespace TourBooker.Logic
             {
                 return false;
             }
+        }
+
+        public static bool operator ==(CountryCode lhs, CountryCode rhs)
+        {
+            if (lhs != null)
+            {
+                return lhs.Equals(rhs);
+            }
+            else
+            {
+                return rhs == null;
+            }
+        }
+
+        public static bool operator !=(CountryCode lhs, CountryCode rhs)
+        {
+            return !(lhs == rhs);
         }
     }
 }
