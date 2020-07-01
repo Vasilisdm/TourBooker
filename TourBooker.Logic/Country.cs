@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TourBooker.Logic;
 
 namespace Pluralsight.AdvCShColls.TourBooker.Logic
 {
 	public class Country
 	{
 		public string Name { get; }
-		public string Code { get; }
+		public CountryCode Code { get; }
 		public string Region { get; }
 		public int Population { get; }
 		public Country(string name, string code, string region, int population)
 		{
 			Name = name;
-			Code = code;
+			Code = new CountryCode(code);
 			Region = region;
 			Population = population;
 		}

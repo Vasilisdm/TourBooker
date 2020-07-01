@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourBooker.Logic;
 
 namespace Pluralsight.AdvCShColls.TourBooker.UI
 {
@@ -44,7 +45,7 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 		{
 			if (code.Length != 3)
 				return null;
-			AllData.AllCountriesByKey.TryGetValue(code, out Country result);
+			AllData.AllCountriesByKey.TryGetValue(new CountryCode(code), out Country result);
 			return result;
 		}
 	}
