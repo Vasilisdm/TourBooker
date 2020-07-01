@@ -15,7 +15,7 @@ namespace Pluralsight.AdvCShColls.TourBooker.Logic
 			CsvReader reader = new CsvReader(csvFilePath);
 			AllCountries = reader.ReadAllCountries().OrderBy(c => c.Name).ToList();
 			var dict = AllCountries.ToDictionary(c => c.Code, StringComparer.OrdinalIgnoreCase);
-			var AllCountriesByKey = new SortedDictionary<string, Country>(dict);
+			AllCountriesByKey = new SortedDictionary<string, Country>(dict);
 		}
 	}
 }
