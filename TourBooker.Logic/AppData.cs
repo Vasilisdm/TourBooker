@@ -9,15 +9,12 @@ namespace Pluralsight.AdvCShColls.TourBooker.Logic
 	public class AppData
 	{
 		public List<Country> AllCountries { get; private set; }
+		public Dictionary<string, Country> AllCountriesByKey { get; private set; }
 		public void Initialize(string csvFilePath)
 		{
 			CsvReader reader = new CsvReader(csvFilePath);
 			AllCountries = reader.ReadAllCountries().OrderBy(c => c.Name).ToList();
-
-			// during the module, the above line is changed to
-			//this.AllCountries = reader.ReadAllCountries().OrderBy(x=>x.Name).ToList();
-
-
+			AllCountriesByKey = AllCountries.ToDictionary(c => c.Code);
 		}
 	}
 }
