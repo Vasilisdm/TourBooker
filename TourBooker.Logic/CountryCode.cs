@@ -31,6 +31,8 @@ namespace TourBooker.Logic
             }
         }
 
+        public override int GetHashCode() => StringComparer.OrdinalIgnoreCase.GetHashCode(Value);
+
         public static bool operator ==(CountryCode lhs, CountryCode rhs)
         {
             if (lhs != null)
