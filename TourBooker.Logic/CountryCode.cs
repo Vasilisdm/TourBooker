@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pluralsight.AdvCShColls.TourBooker.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,17 @@ namespace TourBooker.Logic
         }
 
         public override string ToString() => Value;
+
+        public override bool Equals(object obj)
+        {
+            if (obj is CountryCode other)
+            {
+                return StringComparer.OrdinalIgnoreCase.Equals(Value, other.Value);
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
