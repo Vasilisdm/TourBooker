@@ -63,6 +63,9 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 			var nodeToRemove = AllData.ItineraryBuilder.GetNthNode(selectedItinIndex);
 			AllData.ItineraryBuilder.Remove(nodeToRemove);
 
+			var change = new ItineraryChange(ChangeType.Remove, selectedItinIndex, nodeToRemove.Value);
+			AllData.ChangeLog.Push(change);
+
 			this.UpdateAllLists();
 		}
 
