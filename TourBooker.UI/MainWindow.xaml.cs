@@ -112,5 +112,16 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 
 			MessageBox.Show("Tour added", "Success");
 		}
-	}
+
+        private void btnUndo_Click(object sender, RoutedEventArgs e)
+        {
+            if (AllData.ChangeLog.Count==0)
+            {
+            }
+
+			ItineraryChange lastChange = AllData.ChangeLog.Pop();
+			ChangeUndoer.Undo(AllData.ItineraryBuilder, lastChange);
+			UpdateAllLists();
+        } 
+    }
 }
