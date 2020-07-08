@@ -84,6 +84,9 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 			var insertBeforeNode = AllData.ItineraryBuilder.GetNthNode(selectedItinIndex);
 			AllData.ItineraryBuilder.AddBefore(insertBeforeNode, selectedCountry);
 
+			var change = new ItineraryChange(ChangeType.Insert, selectedIndex, insertBeforeNode.Value);
+			AllData.ChangeLog.Push(change);
+
 			this.UpdateAllLists();
 		}
 
