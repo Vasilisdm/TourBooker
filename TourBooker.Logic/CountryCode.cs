@@ -1,12 +1,10 @@
-﻿using Pluralsight.AdvCShColls.TourBooker.Logic;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TourBooker.Logic
+namespace Pluralsight.AdvCShColls.TourBooker.Logic
 {
     public class CountryCode
     {
@@ -18,36 +16,27 @@ namespace TourBooker.Logic
         }
 
         public override string ToString() => Value;
+		public override bool Equals(object obj)
+		{
+			if (obj is CountryCode other)
+				return StringComparer.OrdinalIgnoreCase.Equals(this.Value, other.Value);
+			return false;
+		}
 
-        public override bool Equals(object obj)
-        {
-            if (obj is CountryCode other)
-            {
-                return StringComparer.OrdinalIgnoreCase.Equals(Value, other.Value);
-            }
-            else
-            {
-                return false;
-            }
-        }
+		public static bool operator == (CountryCode lhs, CountryCode rhs)
+		{
+			if (lhs != null)
+				return lhs.Equals(rhs);
+			else
+				return rhs == null;
+		}
 
-        public override int GetHashCode() => StringComparer.OrdinalIgnoreCase.GetHashCode(Value);
+		public static bool operator != (CountryCode lhs, CountryCode rhs)
+		{
+			return !(lhs == rhs);
+		}
 
-        public static bool operator ==(CountryCode lhs, CountryCode rhs)
-        {
-            if (lhs != null)
-            {
-                return lhs.Equals(rhs);
-            }
-            else
-            {
-                return rhs == null;
-            }
-        }
-
-        public static bool operator !=(CountryCode lhs, CountryCode rhs)
-        {
-            return !(lhs == rhs);
-        }
-    }
+		public override int GetHashCode() => 
+			StringComparer.OrdinalIgnoreCase.GetHashCode(this.Value);
+	}
 }
