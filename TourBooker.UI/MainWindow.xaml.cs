@@ -179,11 +179,6 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 
 		private void btnApproveRequest_Click(object sender, RoutedEventArgs e)
 		{
-			//if (AllData.BookingRequests.Count == 0)
-			//	return;
-
-			//var request = AllData.BookingRequests.Dequeue();
-
 			bool dequeueSucceeded = AllData.BookingRequests.TryDequeue(out var request);
 
             if (dequeueSucceeded)
@@ -195,10 +190,8 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 
 		private string GetLatestBookingRequestText()
 		{
-			if (AllData.BookingRequests.Count == 0)
-				return null;
-			else
-				return AllData.BookingRequests.Peek().ToString();
+			bool peekSucceeded = AllData.BookingRequests.TryPeek(out var request);
+			return success ? request.ToString() : null;
 		}
 
 		private void lbxCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
