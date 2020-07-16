@@ -179,12 +179,18 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 
 		private void btnApproveRequest_Click(object sender, RoutedEventArgs e)
 		{
-			if (AllData.BookingRequests.Count == 0)
-				return;
+			//if (AllData.BookingRequests.Count == 0)
+			//	return;
 
-			var request = AllData.BookingRequests.Dequeue();
-			request.TheCustomer.BookedTours.Add(request.TheTour);
-			this.UpdateAllLists();
+			//var request = AllData.BookingRequests.Dequeue();
+
+			bool dequeueSucceeded = AllData.BookingRequests.TryDequeue(out var request);
+
+            if (dequeueSucceeded)
+            {
+				request.TheCustomer.BookedTours.Add(request.TheTour);
+				this.UpdateAllLists();
+            }
 		}
 
 		private string GetLatestBookingRequestText()
