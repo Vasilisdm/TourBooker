@@ -147,7 +147,7 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 			}
 			this.tbxToursItinerary.Text = sb.ToString();
 		}
-		private void btnBookTour_Click(object sender, RoutedEventArgs e)
+		private async void btnBookTour_Click(object sender, RoutedEventArgs e)
 		{
 			Customer customer = this.lbxCustomer.SelectedItem as Customer;
 			if (customer == null)
@@ -163,10 +163,16 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 				return;
 			}
 
+			List<Task> tasks = new List<Task>();
+
 			foreach (Tour tour in requestedTours)
 			{
-				this.AllData.BookingRequests.Enqueue((customer, tour));
+				Task task = Task.Run(() => this.AllData.BookingRequests.Enqueue((customer, tour)));
+				tasks.Add(task);
 			}
+
+			await Task.WhenAll(tasks);
+
 			MessageBox.Show($"{requestedTours.Count} tours requested", "Tours requested");
 			this.UpdateAllLists();
 		}
