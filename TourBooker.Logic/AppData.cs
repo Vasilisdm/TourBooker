@@ -10,7 +10,7 @@ namespace Pluralsight.AdvCShColls.TourBooker.Logic
 {
 	public class AppData
 	{
-		public List<Country> AllCountries { get; private set; }
+		public ReadOnlyCollection<Country> AllCountries { get; private set; }
 		public ReadOnlyDictionary<CountryCode, Country> AllCountriesByKey { get; private set; }
 		public List<Customer> Customers { get; private set; }
 			 = new List<Customer>() { new Customer("Simon"), new Customer("Kim") };
@@ -24,7 +24,7 @@ namespace Pluralsight.AdvCShColls.TourBooker.Logic
 		public void Initialize(string csvFilePath)
 		{
 			CsvReader reader = new CsvReader(csvFilePath);
-			this.AllCountries = reader.ReadAllCountries().OrderBy(x=>x.Name).ToList();
+			this.AllCountries = reader.ReadAllCountries().OrderBy(x=>x.Name).ToList().AsReadOnly();
 			var dict = AllCountries.ToDictionary(x => x.Code);
 			this.AllCountriesByKey = new ReadOnlyDictionary<CountryCode, Country>(dict);
 			this.SetupHardCodedTours();
