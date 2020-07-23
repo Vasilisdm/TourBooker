@@ -137,12 +137,12 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 			this.UpdateAllLists();
 		}
 
-	List<Tour> GetRequestedTours() 
-			=> this.lbxToursToBook.SelectedItems.Cast<Tour>().ToList();
+		IEnumerable<Tour> GetRequestedTours()
+				=> this.lbxToursToBook.SelectedItems.Cast<Tour>();
 
 		private void lbxToursToBook_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			List<Tour> selectedTours = GetRequestedTours();
+			var selectedTours = GetRequestedTours();
 			StringBuilder sb = new StringBuilder();
 
 			foreach (Tour tour in selectedTours)
@@ -165,14 +165,14 @@ namespace Pluralsight.AdvCShColls.TourBooker.UI
 				return;
 			}
 
-			List<Tour> requestedTours = GetRequestedTours();
-			if (requestedTours.Count == 0)
+			var requestedTours = GetRequestedTours();
+			if (!requestedTours.Any())
 			{
 				MessageBox.Show("You must select a tour to book!", "No tour selected");
 				return;
 			}
 
-			List<Task> tasks = new List<Task>();
+			List<Task> tasks = new List<Task>().ToList();
 			foreach (Tour tour in requestedTours)
 			{
 				Task task = Task.Run(
