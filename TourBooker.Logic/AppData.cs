@@ -10,7 +10,7 @@ namespace Pluralsight.AdvCShColls.TourBooker.Logic
 {
 	public class AppData
 	{
-		public ReadOnlyCollection<Country> AllCountries { get; private set; }
+		public IReadOnlyList<Country> AllCountries { get; private set; }
 		public ReadOnlyDictionary<CountryCode, Country> AllCountriesByKey { get; private set; }
 		public List<Customer> Customers { get; private set; }
 			 = new List<Customer>() { new Customer("Simon"), new Customer("Kim") };
